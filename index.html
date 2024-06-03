@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Time of Day</title>
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+        * {padding:0; margin:0;}
+		html {background-color:#ccc;}
+		body {
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+			max-width:960px; /* keeps from getting too large on wide screen */
+			width:90%; /* shrink to fit screen */
+			margin:auto; /* center in html element */
+			background-color:#fff;
+			padding:20px;
+			min-height:100%; /* keeps from getting too large on wide screen */
+			}
+		img.flexible {
+			float:right;
+			display:inline-block;
+			padding:20px;
+			max-width:300px; /* actual size of image */
+			width:33%; /* approximate size taken on screen in maximum view */
+		}
+		p {
+			font-style: italic;
+			margin:10px;
+		}
+		h1,h2,h3,h4,h5,h6{
+			font-weight:normal;
+			margin:10px;
+			}
+		h1.masthead {margin-top:0;}
+		footer {
+			text-align:center;
+			clear:both; /* ride below all items */
+		}
+		  /* Additional style for day of the week */
+		#dayOfWeek {
+            font-weight: bold;
+		}
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="masthead">Time of Day</h1>
+    </header>
+    <main>
+        <header><h3>A JavaScript Project by Julia Johnson</h3></header>
+        <p id="message">Custom message will appear here</p>
+		<br>
+		<p>This page displays a time-based greeting and image using JavaScript.</p>
+		<!-- Display the day of the week -->
+        <p>Today is <span id="dayOfWeek"></span>.</p>
+        <img id="timeImage" src="" alt="Time of Day Image" class="flexible">
+        <footer>
+            <p><small id="copyright">&copy; 
+                <span id="year">2024</span> by Julia Johnson, All Rights Reserved ~ 
+                <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
+                <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
+            </p>
+        </footer>
+    </main>
+    <script>
+        function updateTimeContent() {
+            var currentTime = new Date();
+            var currentHour = currentTime.getHours();
+            var dayOfWeekElement = document.getElementById('dayOfWeek');
+            var messageElement = document.getElementById('message');
+            var imageElement = document.getElementById('timeImage');
+            var yearElement = document.getElementById('year');
+            var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var dayIndex = currentTime.getDay();
+            dayOfWeekElement.textContent = daysOfWeek[dayIndex];
+
+            if (currentHour >= 5 && currentHour < 12) {
+                messageElement.textContent = "Good morning!";
+                imageElement.src = "images/morning.jpg";
+                document.body.style.backgroundColor = "#A7C7E7"; // Pastel blue
+            } else if (currentHour >= 12 && currentHour < 18) {
+                messageElement.textContent = "Good afternoon!";
+                imageElement.src = "images/afternoon.jpg";
+                document.body.style.backgroundColor = "#FAA0A0"; // Pastel red
+            } else if (currentHour >= 18 && currentHour < 23) {
+                messageElement.textContent = "Good evening!";
+                imageElement.src = "images/evening.jpg";
+                document.body.style.backgroundColor = "#F8C8DC"; // Pastel pink
+            } else {
+                messageElement.textContent = "Good night!";
+                imageElement.src = "images/night.jpg";
+                document.body.style.backgroundColor = "#CCCCFF"; // Periwinkle
+            }
+
+            yearElement.textContent = currentTime.getFullYear();
+        }
+
+        updateTimeContent();
+
+        setInterval(updateTimeContent, 60000);
+
+        document.getElementById("html-checker").setAttribute("href","https://validator.w3.org/nu/?doc=" + location.href);
+        document.getElementById("css-checker").setAttribute("href","https://jigsaw.w3.org/css-validator/validator?uri=" + location.href);  
+    </script>
+</body>
+</html>
